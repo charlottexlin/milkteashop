@@ -1,19 +1,49 @@
 <html>
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css" />
     <title>Milk Tea Shop</title>
-    <script src="index.js" defer></script>
+    <script src="index.js"></script>
 </head>
+
 <body>
+    <!-- Informative text at the top of the screen -->
     <div class="info">
         <h1>Thanks for playing my game!</h1>
         <h2>Check out my other stuff at <a href="https://www.charlottexlin.com">charlottexlin.com</a></h2>
     </div>
+
+    <!-- White frame around the game -->
     <div class="rectangle"></div>
+
+    <!-- The actual elements of the game -->
     <div class="game">
+
+        <!-- Background image -->
         <img src="./img/background.png" alt="background">
-        <h1 class="moneyCounter">$2.00</h1>
+
+        <!-- Shop panel on the left side -->
+        <div class="shopPanel">
+            <!-- Customer -->
+            <img src="./img/customer1.png" alt="customer 1" class="customer absolute">
+            <!-- Tea -->
+            <img src="./img/greenTea.png" alt="green tea" class="tea absolute">
+            <!-- Toppings -->
+            <img src="./img/pearls.png" alt="pearls" class="toppings absolute">
+            <!-- Temperature -->
+            <img src="./img/iceCubes.png" alt="ice cubes" class="temperature absolute">
+        </div>
+
+        <!-- Ingredients panel on the right side -->
+        <div class="ingredientsPanel">
+            <h1 class="counter absolute">$2.00</h1>
+        </div>
+
     </div>
+
+    <!-- Informative text at the bottom of the screen -->
     <div class="info bottomText">
         <h2>Report bugs to charlottexlin02@gmail.com</h2>
     </div>

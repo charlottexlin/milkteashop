@@ -1,16 +1,17 @@
 body {
     background-color: gray;
+    font-family: 'Neucha', cursive;
 }
 
 .info {
     position: fixed;
     width: 100%;
     text-align: center;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .bottomText {
     bottom: 40px;
+    /* TODO: might want to change this so it doesn't get pushed up when resizing window */
 }
 
 .rectangle {
@@ -30,8 +31,35 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.moneyCounter {
+.absolute {
     position: absolute;
+}
+
+.tea {
+    top: 208px;
+    left: 40px;
+}
+
+.customer {
+    top: 160px;
+    left: 300px;
+}
+
+.toppings {
+    top: 360px;
+    left: 56px;
+}
+
+.temperature {
+    top: 120px;
+    left: 60px;
+}
+
+.counter {
     bottom: 0;
     right: 0;
+    margin-bottom: 32px;
+    margin-right: 82px;
+    font-size: 30px;
+    font-family:'Courier New', Courier, monospace;
 }
