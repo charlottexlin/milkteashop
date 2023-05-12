@@ -1,4 +1,37 @@
-.background {
-    width: auto;
-    height: 100%;
+body {
+    background-color: gray;
+}
+
+.info {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.bottomText {
+    bottom: 40px;
+}
+
+.rectangle {
+    position: fixed;
+    background-color: white;
+    width: 950px;
+    height: 650px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.game {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.moneyCounter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
