@@ -35,33 +35,78 @@ body {
     position: absolute;
 }
 
-.timer {
-    position: absolute;
+#timer {
     bottom: 140px;
     left: 410px;
 }
 
-.tea {
+#tea {
     top: 208px;
     left: 40px;
 }
 
-.customer {
+#customer {
     top: 160px;
     left: 300px;
 }
 
-.toppings {
+#topping {
     top: 360px;
     left: 56px;
 }
 
-.temperature {
+#temperature {
     top: 120px;
     left: 60px;
 }
 
-.counter {
+.ingredientIcons {
+    display: flex;
+    flex-direction: row;
+    row-gap: 5px;
+    position: absolute;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 270px;
+}
+
+#flavorIcons {
+    top: 90px;
+    right: 16px;
+}
+
+#toppingIcons {
+    top: 230px;
+    right: 16px;
+}
+
+#tempIcons {
+    bottom: 178px;
+    right: 16px;
+}
+
+.icon {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+button {
+    width: 120px;
+    font-size: 30px;
+    font-family: 'Neucha', cursive;
+}
+
+#doneBtn {
+    bottom: 86px;
+    right: 154px;
+}
+
+#trashBtn {
+    bottom: 86px;
+    right: 28px;
+}
+
+#moneyCounter {
     bottom: 0;
     right: 0;
     margin-bottom: 32px;

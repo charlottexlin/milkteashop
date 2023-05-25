@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css" />
     <title>Milk Tea Shop</title>
-    <script src="index.js"></script>
+    <script src="index.js" type="module"></script>
 </head>
 
 <body>
@@ -25,23 +25,54 @@
         <img src="./img/background.png" alt="background">
 
         <!-- Timer -->
-        <h2 class="timer">Remaining Time: 2:00</h2>
+        <h2 id="timer" class="absolute">Remaining Time: 0:00</h2>
 
         <!-- Shop panel on the left side -->
         <div class="shopPanel">
             <!-- Customer -->
-            <img src="./img/customer1.png" alt="customer 1" class="customer absolute">
+            <img src="./img/customer1.png" alt="customer 1" id="customer" class="absolute">
             <!-- Tea -->
-            <img src="./img/greenTea.png" alt="green tea" class="tea absolute">
+            <img src="./img/greenTea.png" alt="green tea" id="tea" class="absolute">
             <!-- Toppings -->
-            <img src="./img/pearls.png" alt="pearls" class="toppings absolute">
+            <img src="./img/pearls.png" alt="pearls" id="topping" class="absolute">
             <!-- Temperature -->
-            <img src="./img/iceCubes.png" alt="ice cubes" class="temperature absolute">
+            <img src="./img/iceCubes.png" alt="ice cubes" id="temperature" class="absolute">
         </div>
 
         <!-- Ingredients panel on the right side -->
         <div class="ingredientsPanel">
-            <h1 class="counter absolute">$2.00</h1>
+            <!-- Flavors -->
+            <div id="flavorIcons" class="ingredientIcons">
+                <img src="./img/greenTeaIcon.png" alt="green tea icon" id="greenTeaIcon" class="icon">
+                <img src="./img/strawberryIcon.png" alt="strawberry icon" id="strawberryIcon" class="icon">
+                <img src="./img/peachIcon.png" alt="peach icon" id="peachIcon" class="icon">
+                <img src="./img/taroIcon.png" alt="taro icon" id="taroIcon" class="icon">
+                <img src="./img/mangoIcon.png" alt="mango icon" id="mangoIcon" class="icon">
+                <img src="./img/lycheeIcon.png" alt="lychee icon" id="lycheeIcon" class="icon">
+                <img src="./img/melonIcon.png" alt="melon icon" id="melonIcon" class="icon">
+                <img src="./img/jasmineIcon.png" alt="jasmine icon" id="jasmineIcon" class="icon">
+            </div>
+            <!-- Toppings -->
+            <div id="toppingIcons" class="ingredientIcons">
+                <img src="./img/strawberryBobaIcon.png" alt="strawberry boba icon" id="strawberryBobaIcon" class="icon">
+                <img src="./img/mangoBobaIcon.png" alt="mango boba icon" id="mangoBobaIcon" class="icon">
+                <img src="./img/pearlsIcon.png" alt="pearls icon" id="pearlsIcon" class="icon">
+                <img src="./img/redBeanIcon.png" alt="red bean icon" id="redBeanIcon" class="icon">
+                <img src="./img/peachJellyIcon.png" alt="peach jelly icon" id="peachJellyIcon" class="icon">
+                <img src="./img/grassJellyIcon.png" alt="grass jelly icon" id="grassJellyIcon" class="icon">
+                <img src="./img/coffeeJellyIcon.png" alt="coffee jelly icon" id="coffeeJellyIcon" class="icon">
+                <img src="./img/whippedCreamIcon.png" alt="whipped cream icon" id="whippedCreamIcon" class="icon">
+            </div>
+            <!-- Temperature -->
+            <div id="tempIcons" class="ingredientIcons">
+                <img src="./img/coldIcon.png" alt="cold icon" id="coldIcon" class="icon">
+                <img src="./img/roomtempIcon.png" alt="room temp icon" id="roomTempIcon" class="icon">
+                <img src="./img/hotIcon.png" alt="hot icon" id="hotIcon" class="icon">
+            </div>
+            <!-- Buttons and money counter -->
+            <button id="doneBtn" class="absolute">Done</button>
+            <button id="trashBtn" class="absolute">Trash</button>
+            <h1 id="moneyCounter" class="absolute">$2.00</h1>
         </div>
 
     </div>

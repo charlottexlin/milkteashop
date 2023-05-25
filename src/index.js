@@ -1,7 +1,8 @@
 import "./ingredients.js";
 
 function main() {
-    generateOrder();
+    // TODO: have a timer, run the game loop while the timer is above 0 seconds
+    
 }
 
 // Generates a random order consisting of a flavor, a topping, and a temperature
@@ -20,6 +21,8 @@ function generateOrder() {
 function rand(lower, upper) {
     Math.floor(Math.random() * upper) + lower;
 }
+
+// 
 
 // Call the main line of execution only when the DOM has completely loaded
 document.addEventListener('DOMContentLoaded', main);
