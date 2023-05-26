@@ -70,6 +70,11 @@ body {
     width: 270px;
 }
 
+#orderIcons {
+    bottom: 48px;
+    left: 200px;
+}
+
 #flavorIcons {
     top: 90px;
     right: 16px;
@@ -94,6 +99,8 @@ button {
     width: 120px;
     font-size: 30px;
     font-family: 'Neucha', cursive;
+    background-color: pink;
+    border-color: white;
 }
 
 #doneBtn {

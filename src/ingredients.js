@@ -1,48 +1,29 @@
-import green from "./img/greenTea.png";
-import strawberry from "./img/strawberryTea.png";
-import peach from "./img/peachTea.png";
-import taro from "./img/taroTea.png";
-import mango from "./img/mangoTea.png";
-import lychee from "./img/lycheeTea.png";
-import melon from "./img/melonTea.png";
-import jasmine from "./img/jasmineTea.png";
-import strawberryBoba from "./img/strawberryBoba.png";
-import mangoBoba from "./img/mangoBoba.png";
-import pearls from "./img/pearls.png";
-import redBean from "./img/redBean.png";
-import peachJelly from "./img/peachJelly.png";
-import grassJelly from "./img/grassJelly.png";
-import coffeeJelly from "./img/coffeeJelly.png";
-import whippedCream from "./img/whippedCream.png";
-import iceCubes from "./img/iceCubes.png";
-import steam from "./img/steam.png";
-
 const flavors = [
-    {name: "greenTea", img: green},
-    {name: "strawberryTea", img: strawberry},
-    {name: "peachTea", img: peach},
-    {name: "taroTea", img: taro},
-    {name: "mangoTea", img: mango},
-    {name: "lycheeTea", img: lychee},
-    {name: "melonTea", img: melon},
-    {name: "jasmineTea", img: jasmine},
+    {name: "green tea", img: "./img/greenTea.png", icon: "./img/greenTeaIcon.png"},
+    {name: "strawberry", img: "./img/strawberryTea.png", icon: "./img/strawberryIcon.png"},
+    {name: "peach", img: "./img/peachTea.png", icon: "./img/peachIcon.png"},
+    {name: "taro", img: "./img/taroTea.png", icon: "./img/taroIcon.png"},
+    {name: "mango", img: "./img/mangoTea.png", icon: "./img/mangoIcon.png"},
+    {name: "lychee", img: "./img/lycheeTea.png", icon: "./img/lycheeIcon.png"},
+    {name: "melon", img: "./img/melonTea.png", icon: "./img/melonIcon.png"},
+    {name: "jasmine", img: "./img/jasmineTea.png", icon: "./img/jasmineIcon.png"},
 ]
 
 const toppings = [
-    {name: "strawberryBoba", img: strawberryBoba},
-    {name: "mangoBoba", img: mangoBoba},
-    {name: "pearls", img: pearls},
-    {name: "redBean", img: redBean},
-    {name: "peachJelly", img: peachJelly},
-    {name: "grassJelly", img: grassJelly},
-    {name: "coffeeJelly", img: coffeeJelly},
-    {name: "whippedCream", img: whippedCream},
+    {name: "strawberry boba", img: "./img/strawberryBoba.png", icon: "./img/strawberryBobaIcon.png"},
+    {name: "mango boba", img: "./img/mangoBoba.png", icon: "./img/mangoBobaIcon.png"},
+    {name: "pearls", img: "./img/pearls.png", icon: "./img/pearlsIcon.png"},
+    {name: "red bean", img: "./img/redBean.png", icon: "./img/redBeanIcon.png"},
+    {name: "peach jelly", img: "./img/peachJelly.png", icon: "./img/peachJellyIcon.png"},
+    {name: "grass jelly", img: "./img/grassJelly.png", icon: "./img/grassJellyIcon.png"},
+    {name: "coffee jelly", img: "./img/coffeeJelly.png", icon: "./img/coffeeJellyIcon.png"},
+    {name: "whipped cream", img: "./img/whippedCream.png", icon: "./img/whippedCreamIcon.png"},
 ]
 
 const temperatures = [
-    {name: "cold", img: iceCubes},
-    {name: "medium", img: ""},
-    {name: "hot", img: steam},
+    {name: "cold", img: "./img/iceCubes.png", icon: "./img/coldIcon.png"},
+    {name: "room temp", img: "", icon: "./img/roomTempIcon.png"},
+    {name: "hot", img: "./img/steam.png", icon: "./img/hotIcon.png"},
 ]
 
 export {
