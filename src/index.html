@@ -21,14 +21,16 @@
     <!-- The actual elements of the game -->
     <div class="game">
 
-        <!-- Background image -->
-        <img src="./img/background.png" alt="background">
+        <!-- Background images -->
+        <img src="./img/shopPane.png" alt="shop pane" id="shopPane" class="absolute">
+        <img src="./img/orderPane.png" alt="order pane" id="orderPane" class="absolute">
+        <img src="./img/ingredientsPane.png" alt="ingredients pane" id="ingredientsPane" class="absolute">
 
         <!-- Timer -->
         <h2 id="timer" class="absolute">Remaining Time: 2:00</h2>
 
         <!-- Shop panel on the top-left side -->
-        <div class="shopPanel">
+        <div>
             <!-- Customer -->
             <img src="./img/customer1.png" alt="customer" id="customer" class="absolute">
             <!-- Perfect -->
@@ -45,7 +47,7 @@
         </div>
 
         <!-- Order panel on the bottom-left side -->
-        <div class="orderPanel">
+        <div>
             <div id="orderIcons" class="ingredientIcons">
                 <img src="" alt="" id="flavorOrder" class="icon">
                 <img src="" alt="" id="toppingOrder" class="icon">
@@ -54,7 +56,7 @@
         </div>
 
         <!-- Ingredients panel on the right side -->
-        <div class="ingredientsPanel">
+        <div>
             <!-- Flavors -->
             <div id="flavorIcons" class="ingredientIcons">
                 <img src="./img/greenTeaIcon.png" alt="green tea icon" id="greenTeaIcon" class="icon">
