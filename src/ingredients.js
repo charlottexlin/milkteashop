@@ -26,8 +26,18 @@ const temperatures = [
     {name: "hot", img: "./img/steam.png", icon: "./img/hotIcon.png", iconId: "hotIcon"},
 ]
 
+const customers = [
+    {name: "penny", img: "./img/customer1.png"},
+    {name: "vivian", img: "./img/customer1.png"},
+    {name: "fariha", img: "./img/customer1.png"},
+    {name: "jason", img: "./img/customer1.png"},
+    {name: "henry", img: "./img/customer1.png"},
+    {name: "kevin", img: "./img/customer1.png"},
+]
+
 export {
     flavors,
     toppings,
     temperatures,
+    customers,
 }

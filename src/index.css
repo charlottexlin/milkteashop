@@ -35,14 +35,45 @@ body {
     left: 410px;
 }
 
-#tea {
-    top: 208px;
-    left: 40px;
+#perfect {
+    top: 164px;
+    left: 230px;
+}
+
+.perfect-animation {
+    animation: translate-y 700ms;
+}
+
+@keyframes translate-y {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-20px);
+    }
 }
 
 #customer {
     top: 160px;
-    left: 300px;
+    left: 386px;
+}
+
+.customer-animation {
+    animation: exit-right;
+}
+
+@keyframes exit-right {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(200px);
+    }
+}
+
+#tea {
+    top: 208px;
+    left: 40px;
 }
 
 #boba {
