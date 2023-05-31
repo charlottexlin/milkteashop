@@ -2,19 +2,42 @@ import * as ingredients from "./ingredients.js";
 
 let money = 0;
 let currentTea = {flavor: "", topping: "", temperature: ""};
+let timeLeft = 120; // Timer for the game, in seconds
+let timer;
 
 // Call the main line of execution only when the DOM has completely loaded
 document.addEventListener('DOMContentLoaded', main);
 
 async function main() {
-    // TODO: have a timer, run the game loop while the timer is above 0 seconds
-    while (true) {
+    timer = setInterval(tick, 1000);
+    while (timeLeft > 0) {
         const order = generateOrder();
         setupButtons(order);
         activateIngredientButtons();
         displayOrder(order);
         await doneBtnClicked();
+        cupTransition();
+        customerTransition();
     }
+    gameOver();
+}
+
+// Count down one second
+function tick() {
+    timeLeft--;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = ("0" + timeLeft % 60).slice(-2);
+    document.getElementById("timer").innerHTML = "Remaining Time: " + minutes + ":" + seconds;
+    if (timeLeft <= 0) {
+        gameOver();
+    }
+}
+
+// Show the game over screen (once the timer runs out)
+function gameOver() {
+    clearInterval(timer);
+    // TODO
+    console.log("game over");
 }
 
 // Generates a random order consisting of a flavor, a topping, and a temperature
@@ -39,10 +62,6 @@ function setupButtons(order) {
     const doneBtn = document.getElementById("doneBtn");
     doneBtn.onclick = () => {
         submitOrder(currentTea, order);
-        // TODO possibly add animation here (finished cup slide out)
-        clearCup();
-        // TODO possibly add animation here (blank cup slide in)
-        activateIngredientButtons();
     }
     const trashBtn = document.getElementById("trashBtn");
     trashBtn.onclick = () => {
@@ -73,6 +92,7 @@ function submitOrder(playerTea, orderTea) {
         return playerTea[curr].name === orderTea[curr].name ? accum + 1 : accum;
     }, 0);
     if (correct === 3) { // 3 correct = perfect, give $3
+        displayPerfect();
         money += 3;
         updateMoneyCounter(money);
     } else if (correct === 2) { // 2 correct = give $2
@@ -83,6 +103,25 @@ function submitOrder(playerTea, orderTea) {
         updateMoneyCounter(money);
     } // 0 correct = give $0
     // TODO possibly do something here?
+}
+
+// Show the "perfect" text if the tea was made correctly
+function displayPerfect() {
+    const ele = document.getElementById("perfect");
+    ele.src = "./img/perfect.png";
+    ele.alt = "perfect";
+    ele.classList.remove("perfect-animation");
+    // Code trick citation: https://css-tricks.com/restart-css-animation/
+    void ele.offsetWidth;
+    ele.classList.add("perfect-animation");
+    setTimeout(hidePerfect, 600);
+}
+
+// Remove the "perfect" text
+function hidePerfect() {
+    const ele = document.getElementById("perfect");
+    ele.src = "";
+    ele.alt = "";
 }
 
 // Updates the money counter in the DOM to display the given value
@@ -122,7 +161,7 @@ function addTopping(topping) {
         elementId = "jelly";
     } else if (topping.name === "red bean") {
         elementId = "redBean";
-    } else if (topping.name === "whippedCream") {
+    } else if (topping.name === "whipped cream") {
         elementId = "whippedCream";
     } else {
         elementId = "boba";
@@ -165,6 +204,7 @@ function displayOrder(order) {
     tempOrder.alt = order.temperature.name + " icon";
 }
 
+// Wait for the done button to be clicked - before moving onto the next game round
 function doneBtnClicked() {
     // Code idea citation: https://stackoverflow.com/questions/54916739/wait-for-click-event-inside-a-for-loop-similar-to-prompt
     return new Promise((resolve) => {
@@ -175,4 +215,27 @@ function doneBtnClicked() {
         }
         doneBtn.addEventListener('click', handleClick);
     });
+}
+
+// Reset the cup after finishing an order
+function cupTransition() {
+    // TODO possibly add animation here (finished cup slide out)
+    clearCup();
+    // TODO possibly add animation here (blank cup slide in)
+    activateIngredientButtons();
+}
+
+// Get a random new customer after finishing an order
+function customerTransition() {
+    const ele = document.getElementById("customer");
+    ele.classList.remove("customer-animation");
+    // Code trick citation: https://css-tricks.com/restart-css-animation/
+    
+    void ele.offsetWidth;
+    ele.classList.add("customer-animation");
+
+    // TODO
+    
+    ele.src = "./img/perfect.png";
+    ele.alt = "perfect";
 }
