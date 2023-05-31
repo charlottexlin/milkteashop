@@ -17,7 +17,7 @@ async function main() {
         displayOrder(order);
         await doneBtnClicked();
         cupTransition();
-        customerTransition();
+        await customerTransition();
     }
     gameOver();
 }
@@ -226,16 +226,30 @@ function cupTransition() {
 }
 
 // Get a random new customer after finishing an order
-function customerTransition() {
+async function customerTransition() {
     const ele = document.getElementById("customer");
-    ele.classList.remove("customer-animation");
-    // Code trick citation: https://css-tricks.com/restart-css-animation/
+    ele.classList.remove("enter-right");
+    ele.classList.remove("exit-right");
+    void ele.offsetWidth;
+    ele.classList.add("exit-right");
+
+    await getNewCustomer();
     
     void ele.offsetWidth;
-    ele.classList.add("customer-animation");
+    ele.classList.add("enter-right");
+}
 
-    // TODO
-    
-    ele.src = "./img/perfect.png";
-    ele.alt = "perfect";
+// Change the customer's image
+function getNewCustomer() {
+    return new Promise((resolve) => {
+        setTimeout(changeImage, 1000);
+        function changeImage() {
+            // TODO make it so you can't get the same customer twice in a row
+            // const randomCustomer = ingredients.customers[rand(0,6)].img;
+            const ele = document.getElementById("customer");
+            const randomCustomer = "./img/customer1.png";
+            ele.src = randomCustomer;
+            resolve();
+        }
+    });
 }
