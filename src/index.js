@@ -56,9 +56,10 @@ function clearCup() {
     const tea = document.getElementById("tea");
     tea.src = "";
     tea.alt = "";
-    const topping = document.getElementById("topping");
-    topping.src = "";
-    topping.alt = "";
+    Array.from(document.getElementsByClassName("topping")).forEach((topping) => {
+        topping.src = "";
+        topping.alt = "";
+    });
     const temp = document.getElementById("temperature");
     temp.src = "";
     temp.alt = "";
@@ -116,9 +117,17 @@ function fillTea(flavor) {
 
 // Adds the given topping to the cup and deactivates topping buttons
 function addTopping(topping) {
-    // TODO Toppings go on bottom except whipped cream
-    // TODO also red bean and jelly have diff placements
-    const ele = document.getElementById("topping");
+    let elementId = "";
+    if (topping.name === "peach jelly" || topping.name === "grass jelly" || topping.name === "coffee jelly") {
+        elementId = "jelly";
+    } else if (topping.name === "red bean") {
+        elementId = "redBean";
+    } else if (topping.name === "whippedCream") {
+        elementId = "whippedCream";
+    } else {
+        elementId = "boba";
+    }
+    const ele = document.getElementById(elementId);
     ele.src = topping.img;
     ele.alt = topping.name;
     currentTea.topping = topping;

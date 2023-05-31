@@ -45,9 +45,24 @@ body {
     left: 300px;
 }
 
-#topping {
+#boba {
     top: 360px;
     left: 56px;
+}
+
+#redBean {
+    top: 208px;
+    left: 54px;
+}
+
+#jelly {
+    top: 344px;
+    left: 56px;
+}
+
+#whippedCream {
+    top: 132px;
+    left: 40px;
 }
 
 #temperature {
@@ -109,10 +124,8 @@ button {
 }
 
 #moneyCounter {
-    bottom: 0;
-    right: 0;
-    margin-bottom: 32px;
-    margin-right: 132px;
+    bottom: 10px;
+    left: 730px;
     font-size: 30px;
     font-family:'Courier New', Courier, monospace;
 }
