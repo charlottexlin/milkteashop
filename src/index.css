@@ -9,11 +9,6 @@ body {
     text-align: center;
 }
 
-.bottomText {
-    bottom: 40px;
-    /* TODO: might want to change this so it doesn't get pushed up when resizing window */
-}
-
 .rectangle {
     position: fixed;
     background-color: white;
@@ -117,7 +112,7 @@ button {
     bottom: 0;
     right: 0;
     margin-bottom: 32px;
-    margin-right: 82px;
+    margin-right: 132px;
     font-size: 30px;
     font-family:'Courier New', Courier, monospace;
 }
