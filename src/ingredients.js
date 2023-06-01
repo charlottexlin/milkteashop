@@ -27,12 +27,12 @@ const temperatures = [
 ]
 
 const customers = [
-    {name: "penny", img: "./img/customer1.png"},
-    {name: "vivian", img: "./img/customer1.png"},
-    {name: "fariha", img: "./img/customer1.png"},
-    {name: "jason", img: "./img/customer1.png"},
-    {name: "henry", img: "./img/customer1.png"},
-    {name: "kevin", img: "./img/customer1.png"},
+    {name: "penny", default: "./img/penny.png", angry: "./img/penny-angry.png", happy: "./img/penny-happy.png"},
+    {name: "vivian", default: "./img/vivian.png", angry: "./img/vivian-angry.png", happy: "./img/vivian-happy.png"},
+    {name: "fariha", default: "./img/fariha.png", angry: "./img/fariha-angry.png", happy: "./img/fariha-happy.png"},
+    {name: "jason", default: "./img/jason.png", angry: "./img/jason-angry.png", happy: "./img/jason-happy.png"},
+    {name: "henry", default: "./img/henry.png", angry: "./img/henry-angry.png", happy: "./img/henry-happy.png"},
+    {name: "kevin", default: "./img/kevin.png", angry: "./img/kevin-angry.png", happy: "./img/kevin-happy.png"},
 ]
 
 export {

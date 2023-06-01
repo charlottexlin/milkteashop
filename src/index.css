@@ -56,7 +56,14 @@ body {
 
 #perfect {
     top: -110px;
-    left: -230px;
+    left: -228px;
+}
+
+#priceText {
+    font-size: 42px;
+    color: cornflowerblue;
+    top: -86px;
+    left: -190px;
 }
 
 .perfect-animation {

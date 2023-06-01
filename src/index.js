@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', main);
 
 async function main() {
     timer = setInterval(tick, 1000);
+    await customerTransition();
     while (timeLeft > 0) {
         const order = generateOrder();
         setupButtons(order);
@@ -52,9 +53,15 @@ function generateOrder() {
     }
 }
 
-// Generates a random integer between the lower (inclusive) and upper bound (exclusive)
-function rand(lower, upper) {
-    return Math.floor(Math.random() * upper) + lower;
+// Generates a random integer between the lower (inclusive) and upper bound (exclusive), excluding the given single number to exclude
+function rand(lower, upper, exclude) {
+    let number = Math.floor(Math.random() * upper) + lower;
+    if (exclude) {
+        while (number == exclude) {
+            number = Math.floor(Math.random() * upper) + lower;
+        }
+    }
+    return number;
 }
 
 // Set up onclick functions for done and trash buttons
@@ -93,15 +100,20 @@ function submitOrder(playerTea, orderTea) {
     }, 0);
     if (correct === 3) { // 3 correct = perfect, give $3
         displayPerfect();
+        displayPrice(3);
         money += 3;
         updateMoneyCounter(money);
     } else if (correct === 2) { // 2 correct = give $2
+        displayPrice(2);
         money += 2;
         updateMoneyCounter(money);
     } else if (correct === 1) { // 1 correct = give $1
+        displayPrice(1);
         money += 1;
         updateMoneyCounter(money);
-    } // 0 correct = give $0
+    } else { // 0 correct = give $0
+        displayPrice(0);
+    }
     // TODO possibly do something here?
 }
 
@@ -117,11 +129,27 @@ function displayPerfect() {
     setTimeout(hidePerfect, 600);
 }
 
+// Show the price text, with how much money you made from this tea
+function displayPrice(amount) {
+    const ele = document.getElementById("priceText");
+    ele.innerHTML = "+ $" + amount;
+    ele.classList.remove("perfect-animation");
+    void ele.offsetWidth;
+    ele.classList.add("perfect-animation");
+    setTimeout(hidePrice, 600);
+}
+
 // Remove the "perfect" text
 function hidePerfect() {
     const ele = document.getElementById("perfect");
     ele.src = "";
     ele.alt = "";
+}
+
+// Remove the "price" text
+function hidePrice() {
+    const ele = document.getElementById("priceText");
+    ele.innerHTML = "";
 }
 
 // Updates the money counter in the DOM to display the given value
@@ -244,11 +272,32 @@ function getNewCustomer() {
     return new Promise((resolve) => {
         setTimeout(changeImage, 1000);
         function changeImage() {
-            // TODO make it so you can't get the same customer twice in a row
-            // const randomCustomer = ingredients.customers[rand(0,6)].img;
             const ele = document.getElementById("customer");
-            const randomCustomer = "./img/customer1.png";
-            ele.src = randomCustomer;
+            // Don't allow the same customer twice in a row
+            let exclude = -1;
+            switch (ele.alt) {
+                case "penny":
+                    exclude = 0;
+                    break;
+                case "vivian":
+                    exclude = 1;
+                    break;
+                case "fariha":
+                    exclude = 2;
+                    break;
+                case "jason":
+                    exclude = 3;
+                    break;
+                case "henry":
+                    exclude = 4;
+                    break;
+                case "kevin":
+                    exclude = 5;
+                    break;
+            }
+            const randomCustomer = ingredients.customers[rand(0,6,exclude)];
+            ele.src = randomCustomer.default;
+            ele.alt = randomCustomer.name;
             resolve();
         }
     });
