@@ -1,24 +1,26 @@
 import * as ingredients from "./ingredients.js";
 
-let money = 0;
-let currentTea = {flavor: "", topping: "", temperature: ""};
-let timeLeft = 120; // Timer for the game, in seconds
-let timer;
+let money = 0; // Money the player has made so far
+let currentTea = {flavor: "", topping: "", temperature: ""}; // Tea that the player has built so far
+let timeLeft = 10; // Amount of seconds left on the game timer, in seconds
+let timer; // The actual timer "object"
+let trashed = false; // Tracks if you hit trash during this round
+let teaCount = 0;// The number of teas that the customer has made since they started playing
+let perfectCount = 0; // The number of perfect teas that the customer has made since they started playing
 
 // Call the main line of execution only when the DOM has completely loaded
 document.addEventListener('DOMContentLoaded', main);
 
 async function main() {
     timer = setInterval(tick, 1000);
-    await customerTransition();
     while (timeLeft > 0) {
+        await transition();
+        trashed = false;
         const order = generateOrder();
         setupButtons(order);
         activateIngredientButtons();
         displayOrder(order);
         await doneBtnClicked();
-        cupTransition();
-        await customerTransition();
     }
     gameOver();
 }
@@ -34,9 +36,11 @@ function tick() {
     }
 }
 
-// Show the game over screen (once the timer runs out)
+// Get rid of the game to show the game over screen (once the timer runs out)
 function gameOver() {
     clearInterval(timer);
+    const gameEle = document.getElementById("game");
+    gameEle.remove();
     // TODO
     console.log("game over");
 }
@@ -72,9 +76,20 @@ function setupButtons(order) {
     }
     const trashBtn = document.getElementById("trashBtn");
     trashBtn.onclick = () => {
+        trashed = true;
         clearCup();
         activateIngredientButtons();
     }
+}
+
+// Wait for 1 second, then clear the cup (used to wait for transition)
+function clearCupAfter1s() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            clearCup();
+            resolve();
+        }, 1000);
+    });
 }
 
 // Clear the cup (remove tea, toppings, and temperature)
@@ -94,12 +109,17 @@ function clearCup() {
 
 // Checks if the tea that the player made matches the ordered tea, then adds to player's money based on that
 function submitOrder(playerTea, orderTea) {
+    // Add to tea count
+    teaCount++;
     // Go through each of the keys in playerTea and count how many values match orderTea.
     const correct = Object.keys(playerTea).reduce((accum, curr) => {
         return playerTea[curr].name === orderTea[curr].name ? accum + 1 : accum;
     }, 0);
-    if (correct === 3) { // 3 correct = perfect, give $3
-        displayPerfect();
+    if (correct === 3) { // 3 correct, give $3
+        if (trashed === false) { // If player gets 3 correct and didn't hit trash this round, show perfect and add to perfect count
+            displayPerfect();
+            perfectCount++;
+        }
         displayPrice(3);
         changeCustomerImage("happy");
         money += 3;
@@ -126,7 +146,7 @@ function displayPerfect() {
     ele.alt = "perfect";
     ele.classList.remove("perfect-animation");
     // Animation replay trick - code citation: https://css-tricks.com/restart-css-animation/
-    void ele.offsetWidth;
+    ele.offsetWidth;
     ele.classList.add("perfect-animation");
     setTimeout(hidePerfect, 600);
 }
@@ -136,7 +156,7 @@ function displayPrice(amount) {
     const ele = document.getElementById("priceText");
     ele.innerHTML = "+ $" + amount;
     ele.classList.remove("perfect-animation");
-    void ele.offsetWidth;
+    ele.offsetWidth;
     ele.classList.add("perfect-animation");
     setTimeout(hidePrice, 600);
 }
@@ -254,25 +274,40 @@ function doneBtnClicked() {
     });
 }
 
+// Runs both the cup and customer transition concurrently
+async function transition() {
+    cupTransition();
+    await customerTransition();
+}
+
 // Reset the cup after finishing an order
-function cupTransition() {
-    // TODO possibly add animation here (finished cup slide out)
-    clearCup();
-    // TODO possibly add animation here (blank cup slide in)
+async function cupTransition() {
+    // Old cup exit animation
+    const ele = document.getElementById("cupOfTea");
+    ele.classList.remove("enter-left");
+    ele.classList.remove("exit-left");
+    ele.offsetWidth;
+    ele.classList.add("exit-left");
+
+    await clearCupAfter1s();
+    
+    // New cup enter animation
+    ele.offsetWidth;
+    ele.classList.add("enter-left");
     activateIngredientButtons();
 }
 
 // Get a random new customer after finishing an order
 async function customerTransition() {
     const ele = document.getElementById("customer");
+    // Old customer exit animation
     ele.classList.remove("enter-right");
     ele.classList.remove("exit-right");
-    void ele.offsetWidth;
     ele.classList.add("exit-right");
 
     await getNewCustomer();
     
-    void ele.offsetWidth;
+    // New customer enter animation
     ele.classList.add("enter-right");
 }
 

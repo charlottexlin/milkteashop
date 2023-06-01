@@ -9,7 +9,7 @@ body {
     text-align: center;
 }
 
-.rectangle {
+#rectangle {
     position: fixed;
     background-color: white;
     width: 950px;
@@ -19,7 +19,26 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.game {
+.secretBorder {
+    position: fixed;
+    width: 25px;
+    height: 650px;
+    left: -475px;
+    top: -325px;
+    z-index: 3;
+}
+
+#sb1 {
+    background-color: white;
+}
+
+#sb2 {
+    width: 300px;
+    background-color: lightblue;
+    left: -775px;
+}
+
+#game {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -86,7 +105,7 @@ body {
 }
 
 .exit-right {
-    animation: exit-right 1.1s;
+    animation: exit-right 1.2s;
 }
 
 @keyframes exit-right {
@@ -109,6 +128,37 @@ body {
     to {
         transform: translateX(0);
     }
+}
+
+.exit-left {
+    animation: exit-left 1.2s;
+}
+
+@keyframes exit-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-300px);
+    }
+}
+
+.enter-left {
+    animation: enter-left 1s;
+}
+
+@keyframes enter-left {
+    from {
+        transform: translateX(-300px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+#cup {
+    top: -116px;
+    left: -414px;
 }
 
 #tea {

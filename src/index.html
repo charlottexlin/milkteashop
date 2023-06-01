@@ -16,10 +16,10 @@
     </div>
 
     <!-- White frame around the game -->
-    <div class="rectangle"></div>
+    <div id="rectangle"></div>
 
     <!-- The actual elements of the game -->
-    <div class="game">
+    <div id="game">
 
         <!-- Background images -->
         <img src="./img/shopPane.png" alt="shop pane" id="shopPane" class="absolute">
@@ -29,23 +29,31 @@
         <!-- Timer -->
         <h2 id="timer" class="absolute">Remaining Time: 2:00</h2>
 
+        <!-- Secret border to cover up the cup changing -->
+        <div id="sb1" class="secretBorder"></div>
+        <div id="sb2" class="secretBorder"></div>
+
         <!-- Shop panel on the top-left side -->
         <div>
             <!-- Customer -->
-            <img src="" alt="" id="customer" class="absolute enter-right">
+            <img src="" alt="" id="customer" class="absolute">
             <!-- Perfect -->
             <img src="" alt="" id="perfect" class="absolute perfect-animation">
             <!-- Price Text -->
             <h1 id="priceText" class="absolute perfect-animation"></h1>
-            <!-- Tea -->
-            <img src="" alt="" id="tea" class="absolute">
-            <!-- Toppings -->
-            <img src="" alt="" id="boba" class="topping absolute">
-            <img src="" alt="" id="redBean" class="topping absolute">
-            <img src="" alt="" id="jelly" class="topping absolute">
-            <img src="" alt="" id="whippedCream" class="topping absolute">
-            <!-- Temperature -->
-            <img src="" alt="" id="temperature" class="absolute">
+            <div id="cupOfTea">
+                <!-- Cup -->
+                <img src="./img/cup.png" alt="cup" id="cup" class="absolute">
+                <!-- Tea -->
+                <img src="" alt="" id="tea" class="absolute">
+                <!-- Toppings -->
+                <img src="" alt="" id="boba" class="topping absolute">
+                <img src="" alt="" id="redBean" class="topping absolute">
+                <img src="" alt="" id="jelly" class="topping absolute">
+                <img src="" alt="" id="whippedCream" class="topping absolute">
+                <!-- Temperature -->
+                <img src="" alt="" id="temperature" class="absolute">
+            </div>
         </div>
 
         <!-- Order panel on the bottom-left side -->
