@@ -57,7 +57,7 @@ function generateOrder() {
 function rand(lower, upper, exclude) {
     let number = Math.floor(Math.random() * upper) + lower;
     if (exclude) {
-        while (number == exclude) {
+        while (number === exclude) {
             number = Math.floor(Math.random() * upper) + lower;
         }
     }
@@ -101,6 +101,7 @@ function submitOrder(playerTea, orderTea) {
     if (correct === 3) { // 3 correct = perfect, give $3
         displayPerfect();
         displayPrice(3);
+        changeCustomerImage("happy");
         money += 3;
         updateMoneyCounter(money);
     } else if (correct === 2) { // 2 correct = give $2
@@ -109,12 +110,13 @@ function submitOrder(playerTea, orderTea) {
         updateMoneyCounter(money);
     } else if (correct === 1) { // 1 correct = give $1
         displayPrice(1);
+        changeCustomerImage("angry");
         money += 1;
         updateMoneyCounter(money);
     } else { // 0 correct = give $0
+        changeCustomerImage("angry");
         displayPrice(0);
     }
-    // TODO possibly do something here?
 }
 
 // Show the "perfect" text if the tea was made correctly
@@ -123,7 +125,7 @@ function displayPerfect() {
     ele.src = "./img/perfect.png";
     ele.alt = "perfect";
     ele.classList.remove("perfect-animation");
-    // Code trick citation: https://css-tricks.com/restart-css-animation/
+    // Animation replay trick - code citation: https://css-tricks.com/restart-css-animation/
     void ele.offsetWidth;
     ele.classList.add("perfect-animation");
     setTimeout(hidePerfect, 600);
@@ -137,6 +139,13 @@ function displayPrice(amount) {
     void ele.offsetWidth;
     ele.classList.add("perfect-animation");
     setTimeout(hidePrice, 600);
+}
+
+// Change the customer's image to either their "happy" expression (when you make their tea perfectly) or "angry" version (when you make their tea badly)
+function changeCustomerImage(expression) {
+    const ele = document.getElementById("customer");
+    const customer = ingredients.customers.find(cust => cust.name === ele.alt);
+    ele.src = customer[expression];
 }
 
 // Remove the "perfect" text
