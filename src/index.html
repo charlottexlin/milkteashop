@@ -16,10 +16,10 @@
     </div>
 
     <!-- White frame around the game -->
-    <div id="rectangle"></div>
+    <div id="frame"></div>
 
-    <!-- The actual elements of the game -->
-    <div id="game">
+    <!-- The game screen -->
+    <div id="game" class="gameScreen">
 
         <!-- Background images -->
         <img src="./img/shopPane.png" alt="shop pane" id="shopPane" class="absolute">
@@ -27,7 +27,7 @@
         <img src="./img/ingredientsPane.png" alt="ingredients pane" id="ingredientsPane" class="absolute">
 
         <!-- Timer -->
-        <h2 id="timer" class="absolute">Remaining Time: 2:00</h2>
+        <h2 id="timer" class="absolute">Remaining Time: 0:00</h2>
 
         <!-- Secret border to cover up the cup changing -->
         <div id="sb1" class="secretBorder"></div>
@@ -101,6 +101,14 @@
             <h1 id="moneyCounter" class="absolute">$0</h1>
         </div>
 
+    </div>
+
+    <!-- The game over screen -->
+    <div id="gameOver" class="invisible gameScreen">
+    <div id="gameOverBg" class="absolute"></div>
+        <h1 id="gameOverHeader" class="absolute">Game over</h1>
+        <h2 id="gameOverText" class="absolute"></h2>
+        <button id="restartBtn" class="absolute">Play again</button>
     </div>
 </body>
 </html>

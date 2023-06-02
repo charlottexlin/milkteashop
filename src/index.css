@@ -9,7 +9,7 @@ body {
     text-align: center;
 }
 
-#rectangle {
+#frame {
     position: fixed;
     background-color: white;
     width: 950px;
@@ -38,7 +38,7 @@ body {
     left: -775px;
 }
 
-#game {
+.gameScreen {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -249,4 +249,39 @@ button {
     left: 280px;
     font-size: 30px;
     font-family:'Courier New', Courier, monospace;
+}
+
+.invisible {
+    display: none;
+}
+
+#gameOverBg {
+    background-image: linear-gradient(rgb(206,227,255), rgb(255,212,245));
+    width: 900px;
+    height: 600px;
+    top: -300px;
+    left: -450px;
+}
+
+#gameOverHeader {
+    font-size: 108px;
+    white-space: nowrap;
+    left: -200px;
+    top: -300px;
+}
+
+#gameOverText {
+    font-size: 48px;
+    white-space: nowrap;
+    left: -184px;
+    top: -120px;
+    text-align: center;
+}
+
+#restartBtn {
+    font-size: 42px;
+    width: 300px;
+    height: 80px;
+    left: -154px;
+    top: 130px;
 }

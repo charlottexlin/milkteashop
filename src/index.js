@@ -1,8 +1,9 @@
 import * as ingredients from "./ingredients.js";
 
+const timeLimit = 120; // Total number of seconds the game lasts for
 let money = 0; // Money the player has made so far
 let currentTea = {flavor: "", topping: "", temperature: ""}; // Tea that the player has built so far
-let timeLeft = 10; // Amount of seconds left on the game timer, in seconds
+let timeLeft = timeLimit; // Amount of seconds left on the game timer, in seconds
 let timer; // The actual timer "object"
 let trashed = false; // Tracks if you hit trash during this round
 let teaCount = 0;// The number of teas that the customer has made since they started playing
@@ -12,15 +13,18 @@ let perfectCount = 0; // The number of perfect teas that the customer has made s
 document.addEventListener('DOMContentLoaded', main);
 
 async function main() {
+    updateTimerText(timeLimit);
+    updateMoneyCounter(money);
     timer = setInterval(tick, 1000);
+    initialTransition();
     while (timeLeft > 0) {
-        await transition();
         trashed = false;
         const order = generateOrder();
         setupButtons(order);
         activateIngredientButtons();
         displayOrder(order);
         await doneBtnClicked();
+        await transition();
     }
     gameOver();
 }
@@ -28,21 +32,58 @@ async function main() {
 // Count down one second
 function tick() {
     timeLeft--;
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = ("0" + timeLeft % 60).slice(-2);
-    document.getElementById("timer").innerHTML = "Remaining Time: " + minutes + ":" + seconds;
+    updateTimerText(timeLeft);
     if (timeLeft <= 0) {
         gameOver();
     }
 }
 
+// Update the text of the on-screen timer element
+function updateTimerText(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = ("0" + time % 60).slice(-2);
+    document.getElementById("timer").innerHTML = "Remaining Time: " + minutes + ":" + seconds;
+}
+
 // Get rid of the game to show the game over screen (once the timer runs out)
 function gameOver() {
+    // Deactivate buttons and stop timer
+    deactivateAllButtons();
     clearInterval(timer);
+    // Hide game screen
     const gameEle = document.getElementById("game");
-    gameEle.remove();
-    // TODO
-    console.log("game over");
+    gameEle.classList.toggle("invisible");
+    // Show game over screen
+    const gameOverEle = document.getElementById("gameOver");
+    gameOverEle.classList.toggle("invisible");
+    // Set text on game over screen
+    const textEle = document.getElementById("gameOverText");
+    textEle.innerHTML = "Money earned: $" + money + "<br>Total drinks served: " + teaCount + "<br>Perfect drinks: " + perfectCount;
+    // Activate restart button
+    const restartBtn = document.getElementById("restartBtn");
+    restartBtn.onclick = () => {
+        restartGame();
+    }
+}
+
+// Restart the game (after pressing on the "play again" button)
+function restartGame() {
+    // Deactivate restart button
+    document.getElementById("restartBtn").onclick = null;
+    // Hide game over screen
+    const gameOverEle = document.getElementById("gameOver");
+    gameOverEle.classList.toggle("invisible");
+    // Show game screen
+    const gameEle = document.getElementById("game");
+    gameEle.classList.toggle("invisible");
+    // Start over by resetting the timer and global variables, then running the main function
+    timeLeft = timeLimit;
+    money = 0;
+    currentTea = {flavor: "", topping: "", temperature: ""};
+    trashed = false;
+    teaCount = 0;
+    perfectCount = 0;
+    main();
 }
 
 // Generates a random order consisting of a flavor, a topping, and a temperature
@@ -248,6 +289,13 @@ function deactivateButtons(elements) {
     });
 }
 
+// Removes onclick functions of all icons
+function deactivateAllButtons() {
+    deactivateButtons(ingredients.toppings);
+    deactivateButtons(ingredients.flavors);
+    deactivateButtons(ingredients.temperatures);
+}
+
 // Displays the given order in the order panel of the game
 function displayOrder(order) {
     const flavorOrder = document.getElementById("flavorOrder");
@@ -274,13 +322,25 @@ function doneBtnClicked() {
     });
 }
 
+// Animation of cup and customer when the game first starts (no slide out)
+function initialTransition() {
+    // Cup in
+    const cupEle = document.getElementById("cupOfTea");
+    cupEle.offsetWidth;
+    cupEle.classList.add("enter-left");
+    // Select a random customer and customer in
+    getRandomCustomer();
+    const custEle = document.getElementById("customer");
+    custEle.classList.add("enter-right");
+}
+
 // Runs both the cup and customer transition concurrently
 async function transition() {
     cupTransition();
     await customerTransition();
 }
 
-// Reset the cup after finishing an order
+// Transition cup (between rounds)
 async function cupTransition() {
     // Old cup exit animation
     const ele = document.getElementById("cupOfTea");
@@ -297,7 +357,7 @@ async function cupTransition() {
     activateIngredientButtons();
 }
 
-// Get a random new customer after finishing an order
+// Transition customer (between rounds)
 async function customerTransition() {
     const ele = document.getElementById("customer");
     // Old customer exit animation
@@ -305,44 +365,48 @@ async function customerTransition() {
     ele.classList.remove("exit-right");
     ele.classList.add("exit-right");
 
-    await getNewCustomer();
+    await getRandomCustomerAfter1s();
     
     // New customer enter animation
     ele.classList.add("enter-right");
 }
 
-// Change the customer's image
-function getNewCustomer() {
+// Wait for 1 second, then get a new customer (used to wait for transition)
+function getRandomCustomerAfter1s() {
     return new Promise((resolve) => {
-        setTimeout(changeImage, 1000);
-        function changeImage() {
-            const ele = document.getElementById("customer");
-            // Don't allow the same customer twice in a row
-            let exclude = -1;
-            switch (ele.alt) {
-                case "penny":
-                    exclude = 0;
-                    break;
-                case "vivian":
-                    exclude = 1;
-                    break;
-                case "fariha":
-                    exclude = 2;
-                    break;
-                case "jason":
-                    exclude = 3;
-                    break;
-                case "henry":
-                    exclude = 4;
-                    break;
-                case "kevin":
-                    exclude = 5;
-                    break;
-            }
-            const randomCustomer = ingredients.customers[rand(0,6,exclude)];
-            ele.src = randomCustomer.default;
-            ele.alt = randomCustomer.name;
+        setTimeout(() => {
+            getRandomCustomer();
             resolve();
-        }
+        }, 1000);
     });
+}
+
+// Get a random new customer and change the customer's image (after finishing an order)
+function getRandomCustomer() {
+    const ele = document.getElementById("customer");
+    // Don't allow the same customer twice in a row
+    let exclude = -1;
+    switch (ele.alt) {
+        case "penny":
+            exclude = 0;
+            break;
+        case "vivian":
+            exclude = 1;
+            break;
+        case "fariha":
+            exclude = 2;
+            break;
+        case "jason":
+            exclude = 3;
+            break;
+        case "henry":
+            exclude = 4;
+            break;
+        case "kevin":
+            exclude = 5;
+            break;
+    }
+    const randomCustomer = ingredients.customers[rand(0,6,exclude)];
+    ele.src = randomCustomer.default;
+    ele.alt = randomCustomer.name;
 }
