@@ -1,7 +1,6 @@
 import * as ingredients from "./ingredients.js";
 
-//const timeLimit = 120; // Total number of seconds the game lasts for
-const timeLimit = 5; // TODO for testing
+const timeLimit = 120; // Total number of seconds the game lasts for
 let money = 0; // Money the player has made so far
 let currentTea = {flavor: "", topping: "", temperature: ""}; // Tea that the player has built so far
 let timeLeft = timeLimit; // Amount of seconds left on the game timer, in seconds
@@ -27,9 +26,15 @@ const swooshSfx = new Audio('./sfx/swoosh.mp3');
 document.addEventListener('DOMContentLoaded', main);
 
 function main() {
-    /* Google Chrome blocks music autoplay so will have to find some work around
-    bgMusic.play();
-    */
+    // When the game opens, attempt to play the music every 500 ms
+    // This is deal with Google Chrome's requirement to not allow sounds to play without first interacting with the page
+    // Idea is from this Stack Overflow post: https://stackoverflow.com/questions/52163817/is-there-an-event-to-detect-when-user-interacted-with-a-page
+    const tryToPlay = setInterval(async() => {
+        try {
+            await bgMusic.play();
+            clearInterval(tryToPlay);
+        } catch (err) { }
+    }, 500);
     gameStartMenu();
 }
 
@@ -126,6 +131,7 @@ function gameOver() {
         // Hide game over screen
         gameOverEle.classList.add("invisible");
         buttonSfx.play();
+        resetGame();
         gameStartMenu();
     }
 }
@@ -140,6 +146,12 @@ function restartGame() {
     // Show game screen
     const gameEle = document.getElementById("game");
     gameEle.classList.remove("invisible");
+    resetGame();
+    gameLoop();
+}
+
+// Reset all game variables in preparation to start a new round
+function resetGame() {
     // Start over by resetting the timer and global variables, then running the main function
     timeLeft = timeLimit;
     money = 0;
@@ -147,7 +159,6 @@ function restartGame() {
     trashed = false;
     teaCount = 0;
     perfectCount = 0;
-    gameLoop();
 }
 
 async function gameLoop() {

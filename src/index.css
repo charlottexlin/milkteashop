@@ -288,10 +288,32 @@ button {
     left: -270px;
 }
 
+.infoText {
+    width: 800px;
+    left: -400px;
+    text-align: center;
+}
+
 #tutorialHeader {
     font-size: 80px;
     top: -320px;
     left: -180px;
+}
+
+#tutorialText {
+    font-size: 28px;
+    top: -150px;
+}
+
+#creditsHeader {
+    font-size: 80px;
+    top: -320px;
+    left: -110px;
+}
+
+#creditsText {
+    font-size: 42px;
+    top: -156px;
 }
 
 #gameOverHeader {
