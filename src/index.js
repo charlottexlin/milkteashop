@@ -1,6 +1,7 @@
 import * as ingredients from "./ingredients.js";
 
-const timeLimit = 120; // Total number of seconds the game lasts for
+//const timeLimit = 120; // Total number of seconds the game lasts for
+const timeLimit = 5; // TODO for testing
 let money = 0; // Money the player has made so far
 let currentTea = {flavor: "", topping: "", temperature: ""}; // Tea that the player has built so far
 let timeLeft = timeLimit; // Amount of seconds left on the game timer, in seconds
@@ -9,10 +10,147 @@ let trashed = false; // Tracks if you hit trash during this round
 let teaCount = 0;// The number of teas that the customer has made since they started playing
 let perfectCount = 0; // The number of perfect teas that the customer has made since they started playing
 
+const bgMusic = new Audio('./sfx/TalkingCuteChiptune.mp3');
+const startSfx = new Audio('./sfx/harp-start.mp3');
+const endSfx = new Audio('./sfx/harp-end.mp3');
+const buttonSfx = new Audio('./sfx/button.mp3');
+const bellSfx = new Audio('./sfx/bell.mp3');
+const teaSfx = new Audio('./sfx/water-pour.mp3');
+const toppingSfx = new Audio('./sfx/bubble-pop.mp3');
+const tempSfx = new Audio('./sfx/blip.mp3');
+const trashSfx = new Audio('./sfx/trash.mp3');
+const perfectSfx = new Audio('./sfx/perfect.mp3');
+const failSfx = new Audio('./sfx/fail.mp3');
+const swooshSfx = new Audio('./sfx/swoosh.mp3');
+
 // Call the main line of execution only when the DOM has completely loaded
 document.addEventListener('DOMContentLoaded', main);
 
-async function main() {
+function main() {
+    /* Google Chrome blocks music autoplay so will have to find some work around
+    bgMusic.play();
+    */
+    gameStartMenu();
+}
+
+// Show the game start menu screen
+function gameStartMenu() {
+    // Show game start menu screen
+    const gameStartEle = document.getElementById("gameStart");
+    gameStartEle.classList.remove("invisible");
+    // Activate play button
+    const playBtn = document.getElementById("playBtn");
+    playBtn.onclick = () => {
+        startSfx.play();
+        bellSfx.play();
+        // Hide start menu screen
+        gameStartEle.classList.add("invisible");
+        // Show game screen
+        const gameEle = document.getElementById("game");
+        gameEle.classList.remove("invisible");
+        // Start the game loop
+        gameLoop();
+    }
+    // Activate "how to play" button
+    const tutorialBtn = document.getElementById("tutorialBtn");
+    tutorialBtn.onclick = () => {
+        buttonSfx.play();
+        // Hide start menu screen
+        gameStartEle.classList.add("invisible");
+        tutorial();
+    }
+    // Activate credits button
+    const creditsBtn = document.getElementById("creditsBtn");
+    creditsBtn.onclick = () => {
+        buttonSfx.play();
+        // Hide start menu screen
+        gameStartEle.classList.add("invisible");
+        credits();
+    }
+}
+
+// Show the "how to play" screen
+function tutorial() {
+    // Show "how to play" screen
+    const tutorialEle = document.getElementById("tutorial");
+    tutorialEle.classList.remove("invisible");
+    // Activate back to menu button
+    const backBtn = document.getElementById("backBtn1");
+    backBtn.onclick = () => {
+        // Hide "how to play" screen
+        tutorialEle.classList.add("invisible");
+        buttonSfx.play();
+        gameStartMenu();
+    }
+}
+
+// Show the credits screen
+function credits() {
+    // Show credits screen
+    const creditsEle = document.getElementById("credits");
+    creditsEle.classList.remove("invisible");
+    // Activate back to menu button
+    const backBtn = document.getElementById("backBtn2");
+    backBtn.onclick = () => {
+        // Hide credits screen
+        creditsEle.classList.add("invisible");
+        buttonSfx.play();
+        gameStartMenu();
+    }
+}
+
+// Get rid of the game to show the game over screen (once the timer runs out)
+function gameOver() {
+    endSfx.play();
+    // Deactivate buttons and stop timer
+    deactivateAllButtons();
+    clearInterval(timer);
+    // Hide game screen
+    const gameEle = document.getElementById("game");
+    gameEle.classList.add("invisible");
+    // Show game over screen
+    const gameOverEle = document.getElementById("gameOver");
+    gameOverEle.classList.remove("invisible");
+    // Set text on game over screen
+    const textEle = document.getElementById("gameOverText");
+    textEle.innerHTML = "Money earned: $" + money + "<br>Total drinks served: " + teaCount + "<br>Perfect drinks: " + perfectCount;
+    // Activate restart button
+    const restartBtn = document.getElementById("restartBtn");
+    restartBtn.onclick = () => {
+        buttonSfx.play();
+        restartGame();
+    }
+    // Activate back to menu button
+    const backBtn = document.getElementById("backBtn3");
+    backBtn.onclick = () => {
+        // Hide game over screen
+        gameOverEle.classList.add("invisible");
+        buttonSfx.play();
+        gameStartMenu();
+    }
+}
+
+// Restart the game (after pressing on the "play again" button)
+function restartGame() {
+    // Deactivate restart button
+    document.getElementById("restartBtn").onclick = null;
+    // Hide game over screen
+    const gameOverEle = document.getElementById("gameOver");
+    gameOverEle.classList.add("invisible");
+    // Show game screen
+    const gameEle = document.getElementById("game");
+    gameEle.classList.remove("invisible");
+    // Start over by resetting the timer and global variables, then running the main function
+    timeLeft = timeLimit;
+    money = 0;
+    currentTea = {flavor: "", topping: "", temperature: ""};
+    trashed = false;
+    teaCount = 0;
+    perfectCount = 0;
+    gameLoop();
+}
+
+async function gameLoop() {
     updateTimerText(timeLimit);
     updateMoneyCounter(money);
     timer = setInterval(tick, 1000);
@@ -43,47 +181,6 @@ function updateTimerText(time) {
     const minutes = Math.floor(time / 60);
     const seconds = ("0" + time % 60).slice(-2);
     document.getElementById("timer").innerHTML = "Remaining Time: " + minutes + ":" + seconds;
-}
-
-// Get rid of the game to show the game over screen (once the timer runs out)
-function gameOver() {
-    // Deactivate buttons and stop timer
-    deactivateAllButtons();
-    clearInterval(timer);
-    // Hide game screen
-    const gameEle = document.getElementById("game");
-    gameEle.classList.toggle("invisible");
-    // Show game over screen
-    const gameOverEle = document.getElementById("gameOver");
-    gameOverEle.classList.toggle("invisible");
-    // Set text on game over screen
-    const textEle = document.getElementById("gameOverText");
-    textEle.innerHTML = "Money earned: $" + money + "<br>Total drinks served: " + teaCount + "<br>Perfect drinks: " + perfectCount;
-    // Activate restart button
-    const restartBtn = document.getElementById("restartBtn");
-    restartBtn.onclick = () => {
-        restartGame();
-    }
-}
-
-// Restart the game (after pressing on the "play again" button)
-function restartGame() {
-    // Deactivate restart button
-    document.getElementById("restartBtn").onclick = null;
-    // Hide game over screen
-    const gameOverEle = document.getElementById("gameOver");
-    gameOverEle.classList.toggle("invisible");
-    // Show game screen
-    const gameEle = document.getElementById("game");
-    gameEle.classList.toggle("invisible");
-    // Start over by resetting the timer and global variables, then running the main function
-    timeLeft = timeLimit;
-    money = 0;
-    currentTea = {flavor: "", topping: "", temperature: ""};
-    trashed = false;
-    teaCount = 0;
-    perfectCount = 0;
-    main();
 }
 
 // Generates a random order consisting of a flavor, a topping, and a temperature
@@ -117,6 +214,7 @@ function setupButtons(order) {
     }
     const trashBtn = document.getElementById("trashBtn");
     trashBtn.onclick = () => {
+        trashSfx.play();
         trashed = true;
         clearCup();
         activateIngredientButtons();
@@ -158,6 +256,7 @@ function submitOrder(playerTea, orderTea) {
     }, 0);
     if (correct === 3) { // 3 correct, give $3
         if (trashed === false) { // If player gets 3 correct and didn't hit trash this round, show perfect and add to perfect count
+            perfectSfx.play();
             displayPerfect();
             perfectCount++;
         }
@@ -166,15 +265,18 @@ function submitOrder(playerTea, orderTea) {
         money += 3;
         updateMoneyCounter(money);
     } else if (correct === 2) { // 2 correct = give $2
+        swooshSfx.play();
         displayPrice(2);
         money += 2;
         updateMoneyCounter(money);
     } else if (correct === 1) { // 1 correct = give $1
+        swooshSfx.play();
         displayPrice(1);
         changeCustomerImage("angry");
         money += 1;
         updateMoneyCounter(money);
     } else { // 0 correct = give $0
+        failSfx.play();
         changeCustomerImage("angry");
         displayPrice(0);
     }
@@ -231,15 +333,24 @@ function updateMoneyCounter(value) {
 function activateIngredientButtons() {
     ingredients.flavors.forEach((flavor) => {
         const btn = document.getElementById(flavor.iconId);
-        btn.onclick = () => {fillTea(flavor)};
+        btn.onclick = () => {
+            teaSfx.play();
+            fillTea(flavor);
+        };
     });
     ingredients.toppings.forEach((topping) => {
         const btn = document.getElementById(topping.iconId);
-        btn.onclick = () => {addTopping(topping)};
+        btn.onclick = () => {
+            toppingSfx.play();
+            addTopping(topping);
+        };
     });
     ingredients.temperatures.forEach((temp) => {
         const btn = document.getElementById(temp.iconId);
-        btn.onclick = () => {addTemperature(temp)};
+        btn.onclick = () => {
+            tempSfx.play();
+            addTemperature(temp);
+        };
     });
 }
 
@@ -366,6 +477,7 @@ async function customerTransition() {
     ele.classList.add("exit-right");
 
     await getRandomCustomerAfter1s();
+    bellSfx.play();
     
     // New customer enter animation
     ele.classList.add("enter-right");
