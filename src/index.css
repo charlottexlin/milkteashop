@@ -3,12 +3,6 @@ body {
     font-family: 'Neucha', cursive;
 }
 
-.info {
-    position: fixed;
-    width: 100%;
-    text-align: center;
-}
-
 #frame {
     position: fixed;
     background-color: white;
@@ -26,6 +20,10 @@ body {
     left: -475px;
     top: -325px;
     z-index: 3;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 #sb1 {
@@ -70,7 +68,7 @@ body {
 #timer {
     bottom: -160px;
     left: -40px;
-    width: 200px;
+    width: 210px;
 }
 
 #perfect {
@@ -266,6 +264,16 @@ button {
 .menuHeader {
     font-size: 108px;
     white-space: nowrap;
+}
+
+#musicBtn {
+    left: 292px;
+    bottom: -292px;
+}
+
+#soundBtn {
+    left: 372px;
+    bottom: -292px;
 }
 
 #startMenuBtns {

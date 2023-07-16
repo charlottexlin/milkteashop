@@ -1,4 +1,9 @@
 import * as ingredients from "./ingredients.js";
+import * as sounds from "./sounds.js";
+
+// Music and sound effect toggles
+let musicOn = true;
+let sfxOn = true;
 
 const timeLimit = 120; // Total number of seconds the game lasts for
 let money = 0; // Money the player has made so far
@@ -9,19 +14,6 @@ let trashed = false; // Tracks if you hit trash during this round
 let teaCount = 0;// The number of teas that the customer has made since they started playing
 let perfectCount = 0; // The number of perfect teas that the customer has made since they started playing
 
-const bgMusic = new Audio('./sfx/TalkingCuteChiptune.mp3');
-const startSfx = new Audio('./sfx/harp-start.mp3');
-const endSfx = new Audio('./sfx/harp-end.mp3');
-const buttonSfx = new Audio('./sfx/button.mp3');
-const bellSfx = new Audio('./sfx/bell.mp3');
-const teaSfx = new Audio('./sfx/water-pour.mp3');
-const toppingSfx = new Audio('./sfx/bubble-pop.mp3');
-const tempSfx = new Audio('./sfx/blip.mp3');
-const trashSfx = new Audio('./sfx/trash.mp3');
-const perfectSfx = new Audio('./sfx/perfect.mp3');
-const failSfx = new Audio('./sfx/fail.mp3');
-const swooshSfx = new Audio('./sfx/swoosh.mp3');
-
 // Call the main line of execution only when the DOM has completely loaded
 document.addEventListener('DOMContentLoaded', main);
 
@@ -31,7 +23,8 @@ function main() {
     // Idea is from this Stack Overflow post: https://stackoverflow.com/questions/52163817/is-there-an-event-to-detect-when-user-interacted-with-a-page
     const tryToPlay = setInterval(async() => {
         try {
-            await bgMusic.play();
+            await sounds.bgMusic.play();
+            sounds.bgMusic.loop = true;
             clearInterval(tryToPlay);
         } catch (err) { }
     }, 500);
@@ -46,8 +39,7 @@ function gameStartMenu() {
     // Activate play button
     const playBtn = document.getElementById("playBtn");
     playBtn.onclick = () => {
-        startSfx.play();
-        bellSfx.play();
+        sounds.sfx["bell"].play();
         // Hide start menu screen
         gameStartEle.classList.add("invisible");
         // Show game screen
@@ -59,7 +51,7 @@ function gameStartMenu() {
     // Activate "how to play" button
     const tutorialBtn = document.getElementById("tutorialBtn");
     tutorialBtn.onclick = () => {
-        buttonSfx.play();
+        sounds.sfx["button"].play();
         // Hide start menu screen
         gameStartEle.classList.add("invisible");
         tutorial();
@@ -67,10 +59,60 @@ function gameStartMenu() {
     // Activate credits button
     const creditsBtn = document.getElementById("creditsBtn");
     creditsBtn.onclick = () => {
-        buttonSfx.play();
+        sounds.sfx["button"].play();
         // Hide start menu screen
         gameStartEle.classList.add("invisible");
         credits();
+    }
+    // Activate music button
+    const musicBtn = document.getElementById("musicBtn");
+    musicBtn.onclick = () => {
+        sounds.sfx["button"].play();
+        // Toggle music
+        toggleMusic();
+    }
+    // Activate sound button
+    const soundBtn = document.getElementById("soundBtn");
+    soundBtn.onclick = () => {
+        sounds.sfx["button"].play();
+        // Toggle sound effects
+        toggleSfx();
+    }
+}
+
+// Toggle music
+function toggleMusic() {
+    const musicBtn = document.getElementById("musicBtn");
+    if (musicOn) {
+        // Mute music
+        musicOn = false;
+        musicBtn.src = "./img/noMusic.png";
+        sounds.bgMusic.muted = true;
+    } else {
+        // Unmute music
+        musicOn = true;
+        musicBtn.src = "./img/music.png";
+        sounds.bgMusic.muted = false;
+    }
+}
+
+// Toggle sound effects
+function toggleSfx() {
+    const soundBtn = document.getElementById("soundBtn");
+    if (sfxOn) {
+        // Mute all sfx
+        sfxOn = false;
+        soundBtn.src = "./img/noSound.png";
+        for (const sfxName in sounds.sfx) {
+            sounds.sfx[sfxName].muted = true;
+        }
+    } else {
+        // Unmute all sfx
+        sfxOn = true;
+        soundBtn.src = "./img/sound.png";
+        for (const sfxName in sounds.sfx) {
+            sounds.sfx[sfxName].muted = false;
+        }
     }
 }
 
@@ -84,7 +126,7 @@ function tutorial() {
     backBtn.onclick = () => {
         // Hide "how to play" screen
         tutorialEle.classList.add("invisible");
-        buttonSfx.play();
+        sounds.sfx["button"].play();
         gameStartMenu();
     }
 }
@@ -99,14 +141,14 @@ function credits() {
     backBtn.onclick = () => {
         // Hide credits screen
         creditsEle.classList.add("invisible");
-        buttonSfx.play();
+        sounds.sfx["button"].play();
         gameStartMenu();
     }
 }
 
 // Get rid of the game to show the game over screen (once the timer runs out)
 function gameOver() {
-    endSfx.play();
+    sounds.sfx["end"].play();
     // Deactivate buttons and stop timer
     deactivateAllButtons();
     clearInterval(timer);
@@ -122,7 +164,7 @@ function gameOver() {
     // Activate restart button
     const restartBtn = document.getElementById("restartBtn");
     restartBtn.onclick = () => {
-        buttonSfx.play();
+        sounds.sfx["button"].play();
         restartGame();
     }
     // Activate back to menu button
@@ -130,7 +172,7 @@ function gameOver() {
     backBtn.onclick = () => {
         // Hide game over screen
         gameOverEle.classList.add("invisible");
-        buttonSfx.play();
+        sounds.sfx["button"].play();
         resetGame();
         gameStartMenu();
     }
@@ -222,10 +264,12 @@ function setupButtons(order) {
     const doneBtn = document.getElementById("doneBtn");
     doneBtn.onclick = () => {
         submitOrder(currentTea, order);
+        // Disabled the done button
+        doneBtn.disabled = true;
     }
     const trashBtn = document.getElementById("trashBtn");
     trashBtn.onclick = () => {
-        trashSfx.play();
+        sounds.sfx["trash"].play();
         trashed = true;
         clearCup();
         activateIngredientButtons();
@@ -267,7 +311,7 @@ function submitOrder(playerTea, orderTea) {
     }, 0);
     if (correct === 3) { // 3 correct, give $3
         if (trashed === false) { // If player gets 3 correct and didn't hit trash this round, show perfect and add to perfect count
-            perfectSfx.play();
+            sounds.sfx["perfect"].play();
             displayPerfect();
             perfectCount++;
         }
@@ -276,18 +320,18 @@ function submitOrder(playerTea, orderTea) {
         money += 3;
         updateMoneyCounter(money);
     } else if (correct === 2) { // 2 correct = give $2
-        swooshSfx.play();
+        sounds.sfx["swoosh"].play();
         displayPrice(2);
         money += 2;
         updateMoneyCounter(money);
     } else if (correct === 1) { // 1 correct = give $1
-        swooshSfx.play();
+        sounds.sfx["swoosh"].play();
         displayPrice(1);
         changeCustomerImage("angry");
         money += 1;
         updateMoneyCounter(money);
     } else { // 0 correct = give $0
-        failSfx.play();
+        sounds.sfx["fail"].play();
         changeCustomerImage("angry");
         displayPrice(0);
     }
@@ -345,21 +389,21 @@ function activateIngredientButtons() {
     ingredients.flavors.forEach((flavor) => {
         const btn = document.getElementById(flavor.iconId);
         btn.onclick = () => {
-            teaSfx.play();
+            sounds.sfx["tea"].play();
             fillTea(flavor);
         };
     });
     ingredients.toppings.forEach((topping) => {
         const btn = document.getElementById(topping.iconId);
         btn.onclick = () => {
-            toppingSfx.play();
+            sounds.sfx["topping"].play();
             addTopping(topping);
         };
     });
     ingredients.temperatures.forEach((temp) => {
         const btn = document.getElementById(temp.iconId);
         btn.onclick = () => {
-            tempSfx.play();
+            sounds.sfx["temperature"].play();
             addTemperature(temp);
         };
     });
@@ -460,6 +504,8 @@ function initialTransition() {
 async function transition() {
     cupTransition();
     await customerTransition();
+    // Reenable the done button
+    doneBtn.disabled = false;
 }
 
 // Transition cup (between rounds)
@@ -488,7 +534,7 @@ async function customerTransition() {
     ele.classList.add("exit-right");
 
     await getRandomCustomerAfter1s();
-    bellSfx.play();
+    sounds.sfx["bell"].play();
     
     // New customer enter animation
     ele.classList.add("enter-right");
