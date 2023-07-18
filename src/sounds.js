@@ -1,4 +1,4 @@
-const bgMusic = new Audio('./sfx/music.mp3');
+const bgMusic = new Audio('./sfx/music.wav');
 
 const sfx = {
     "end": new Audio('./sfx/end-chime.mp3'),

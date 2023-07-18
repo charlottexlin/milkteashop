@@ -21,10 +21,18 @@ function main() {
     // When the game opens, attempt to play the music every 500 ms
     // This is deal with Google Chrome's requirement to not allow sounds to play without first interacting with the page
     // Idea is from this Stack Overflow post: https://stackoverflow.com/questions/52163817/is-there-an-event-to-detect-when-user-interacted-with-a-page
+    sounds.bgMusic.autoplay=true;
     const tryToPlay = setInterval(async() => {
         try {
             await sounds.bgMusic.play();
-            sounds.bgMusic.loop = true;
+            // Achieved gapless looping audio using Roko C. Buljan's code from here: https://stackoverflow.com/questions/7330023/gapless-looping-audio-html5
+            sounds.bgMusic.addEventListener('timeupdate', function() {
+                var buffer = 0.1;
+                if (this.currentTime > this.duration - buffer) {
+                    this.currentTime = 0;
+                    this.play();
+                }
+            });
             clearInterval(tryToPlay);
         } catch (err) { }
     }, 500);
@@ -264,7 +272,7 @@ function setupButtons(order) {
     const doneBtn = document.getElementById("doneBtn");
     doneBtn.onclick = () => {
         submitOrder(currentTea, order);
-        // Disabled the done button
+        // Disable the done button
         doneBtn.disabled = true;
     }
     const trashBtn = document.getElementById("trashBtn");
