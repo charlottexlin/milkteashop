@@ -10,17 +10,11 @@
 </head>
 
 <body>
-    <!-- Informative text at the top of the screen -->
-    <div class="info">
-        <h1>Thanks for playing my game!</h1>
-        <h2>Check out my other stuff at <a href="https://www.charlottexlin.com">charlottexlin.com</a></h2>
-    </div>
-
     <!-- White frame around the game -->
     <div id="frame"></div>
 
     <!-- The game screen -->
-    <div id="game" class="gameScreen">
+    <div id="game" class="invisible gameScreen">
 
         <!-- Background images -->
         <img src="./img/shopPane.png" alt="shop pane" id="shopPane" class="absolute">
@@ -104,12 +98,62 @@
 
     </div>
 
+    <!-- The game start screen -->
+    <div id="gameStart" class="gameScreen">
+        <div class="menuBg absolute"></div>
+            <h1 id="startHeader" class="menuHeader absolute">Milk Tea Shop</h1>
+            <div id="startMenuBtns" class="absolute">
+                <button id="playBtn" class="startMenuBtn">Play</button>
+                <button id="tutorialBtn" class="startMenuBtn">How to play</button>
+                <button id="creditsBtn" class="startMenuBtn">Credits</button>
+            </div>
+            <img src="./img/music.png" alt="music button" id="musicBtn" class="absolute">
+            <img src="./img/sound.png" alt="sound button" id="soundBtn" class="absolute">
+        </div>
+    </div>
+
+    <!-- The "how to play" screen -->
+    <div id="tutorial" class="invisible gameScreen">
+        <div class="menuBg absolute"></div>
+            <h1 id="tutorialHeader" class="menuHeader absolute">How to play</h1>
+            <div id="tutorialText" class="infoText absolute">
+                Welcome to your milk tea shop! You will have two minutes to make as much money as possible. 
+                When customers enter your shop, their tea order will appear in the bottom-left panel. 
+                Use the buttons on the right panel to select the correct flavor, toppings, and temperature to make their tea. 
+                If you mess up, press the "Trash" button to throw away the current tea and start over. 
+                When you're done making the tea, press the "Done" button to serve it to the customer. 
+                How much money the customer will pay depends on how correctly you made their order. 
+                Try to serve as many perfect teas to customers as possible to make the most money!
+            </div>
+            <button id="backBtn1" class="backBtn absolute">Back to menu</button>
+        </div>
+    </div>
+
+    <!-- The "credits" screen -->
+    <div id="credits" class="invisible gameScreen">
+        <div class="menuBg absolute"></div>
+            <h1 id="creditsHeader" class="menuHeader absolute">Credits</h1>
+            <div id="creditsText" class="infoText absolute">
+                Developer: Charlotte Lin<br>
+                Art: Charlotte Lin<br>
+                Music: Matthew Regan<br>
+                Sound effects: <a href="https://www.zapsplat.com" target="_blank" rel="noopener noreferrer">Zapsplat.com</a><br>
+                <br>
+                <span class="bold">Visit my site: </span><a href="https://www.charlottexlin.com" target="_blank" rel="noopener noreferrer">www.charlottexlin.com</a>
+            </div>
+            <button id="backBtn2" class="backBtn absolute">Back to menu</button>
+        </div>
+    </div>
+
     <!-- The game over screen -->
     <div id="gameOver" class="invisible gameScreen">
-    <div id="gameOverBg" class="absolute"></div>
-        <h1 id="gameOverHeader" class="absolute">Game over</h1>
+    <div class="menuBg absolute"></div>
+        <h1 id="gameOverHeader" class="menuHeader absolute">Game over</h1>
         <h2 id="gameOverText" class="absolute"></h2>
-        <button id="restartBtn" class="absolute">Play again</button>
+        <div id="gameOverMenuBtns" class="absolute">
+            <button id="restartBtn" class="gameOverMenuBtn">Play again</button>
+            <button id="backBtn3" class="gameOverMenuBtn">Back to menu</button>
+        </div>
     </div>
 </body>
 </html>
