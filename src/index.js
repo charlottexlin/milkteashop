@@ -27,7 +27,7 @@ function main() {
             await sounds.bgMusic.play();
             // Achieved gapless looping audio using Roko C. Buljan's code from here: https://stackoverflow.com/questions/7330023/gapless-looping-audio-html5
             sounds.bgMusic.addEventListener('timeupdate', function() {
-                var buffer = 0.1;
+                var buffer = 0.2;
                 if (this.currentTime > this.duration - buffer) {
                     this.currentTime = 0;
                     this.play();
@@ -322,6 +322,8 @@ function submitOrder(playerTea, orderTea) {
             sounds.sfx["perfect"].play();
             displayPerfect();
             perfectCount++;
+        } else {
+            sounds.sfx["swoosh"].play();
         }
         displayPrice(3);
         changeCustomerImage("happy");
