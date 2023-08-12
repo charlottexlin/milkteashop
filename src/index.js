@@ -297,13 +297,16 @@ function clearCupAfter1s() {
 // Clear the cup (remove tea, toppings, and temperature)
 function clearCup() {
     const tea = document.getElementById("tea");
+    tea.classList.add("invisible");
     tea.src = "";
     tea.alt = "";
     Array.from(document.getElementsByClassName("topping")).forEach((topping) => {
+        topping.classList.add("invisible");
         topping.src = "";
         topping.alt = "";
     });
     const temp = document.getElementById("temperature");
+    temp.classList.add("invisible");
     temp.src = "";
     temp.alt = "";
     currentTea = {flavor: "", topping: "", temperature: ""};
@@ -350,6 +353,7 @@ function submitOrder(playerTea, orderTea) {
 // Show the "perfect" text if the tea was made correctly
 function displayPerfect() {
     const ele = document.getElementById("perfect");
+    ele.classList.remove("invisible");
     ele.src = "./img/perfect.png";
     ele.alt = "perfect";
     ele.classList.remove("perfect-animation");
@@ -379,6 +383,7 @@ function changeCustomerImage(expression) {
 // Remove the "perfect" text
 function hidePerfect() {
     const ele = document.getElementById("perfect");
+    ele.classList.add("invisible");
     ele.src = "";
     ele.alt = "";
 }
@@ -422,7 +427,7 @@ function activateIngredientButtons() {
 // Fills the cup with the given tea flavor and deactivates flavor buttons
 function fillTea(flavor) {
     const ele = document.getElementById("tea");
-    ele.style.display = "block";
+    ele.classList.remove("invisible");
     ele.src = flavor.img;
     ele.alt = flavor.name;
     currentTea.flavor = flavor;
@@ -442,7 +447,7 @@ function addTopping(topping) {
         elementId = "boba";
     }
     const ele = document.getElementById(elementId);
-    ele.style.display = "block";
+    ele.classList.remove("invisible");
     ele.src = topping.img;
     ele.alt = topping.name;
     currentTea.topping = topping;
@@ -453,7 +458,7 @@ function addTopping(topping) {
 function addTemperature(temp) {
     const ele = document.getElementById("temperature");
     if (temp.name === "cold" || temp.name === "hot") {
-        ele.style.display = "block";
+        ele.classList.remove("invisible");
         ele.src = temp.img;
         ele.alt = temp.name;
     }

@@ -67,12 +67,16 @@ body {
 }
 
 #timer {
+    font-size: 2.5263158vw;
+    text-align: right;
     bottom: 46.3157895vw;
-    left: -3.15789474vw;
-    width: 22.1052632vw;
+    right: 80.4210526vw;
+    width: 24.2105263vw;
 }
 
 #perfect {
+    width: 16vw;
+    height: 4.21052632vw;
     top: -11.5789474vw;
     left: -24vw;
 }
@@ -105,7 +109,6 @@ body {
     z-index: -1;
 }
 
-/* TODO */
 .exit-right {
     animation: exit-right 1.2s;
 }
@@ -245,6 +248,7 @@ body {
 }
 
 button {
+    color: black;
     width: 12.6315789vw;
     font-size: 3.15789474vw;
     font-family: 'Neucha', cursive;
@@ -287,11 +291,15 @@ button {
 }
 
 #musicBtn {
+    width: 6.73684211vw;
+    height: 6.73684211vw;
     left: 30.7368421vw;
     bottom: 32.6315789vw;
 }
 
 #soundBtn {
+    width: 6.73684211vw;
+    height: 6.73684211vw;
     left: 39.1578947vw;
     bottom: 32.6315789vw;
 }
