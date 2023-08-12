@@ -241,7 +241,7 @@ function tick() {
 function updateTimerText(time) {
     const minutes = Math.floor(time / 60);
     const seconds = ("0" + time % 60).slice(-2);
-    document.getElementById("timer").innerHTML = "Remaining Time: " + minutes + ":" + seconds;
+    document.getElementById("timer").innerHTML = minutes + ":" + seconds;
 }
 
 // Generates a random order consisting of a flavor, a topping, and a temperature

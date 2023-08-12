@@ -66,12 +66,20 @@ body {
     z-index: 0;
 }
 
+#timerText {
+    font-size: 2.5263158vw;
+    text-align: left;
+    top: 9.5789474vw;
+    left: -4.2105263vw;
+    width: 48.4210526vw;
+}
+
 #timer {
     font-size: 2.5263158vw;
     text-align: right;
     bottom: 46.3157895vw;
     right: 80.4210526vw;
-    width: 24.2105263vw;
+    width: 12.6315789vw;
 }
 
 #perfect {
