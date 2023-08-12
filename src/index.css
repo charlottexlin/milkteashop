@@ -6,74 +6,54 @@ body {
 #frame {
     position: fixed;
     background-color: white;
-    width: 146.153846vh;
-    height: 100vh;
+    width: 100vw;
+    height: 68.4210526vw;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-}
-
-/*
-.secretBorder {
-    position: fixed;
-    width: 25px;
-    height: 650px;
-    left: -475px;
-    top: -325px;
-    z-index: 3;
 }
 
 .bold {
     font-weight: bold;
 }
 
-#sb1 {
-    background-color: white;
-}
-
-#sb2 {
-    width: 300px;
-    background-color: lightblue;
-    left: -775px;
-}
-*/
-
-.gameScreen {
-    width: 138.461538vh;
-    height: 92.3076923vh;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-}
-
 .absolute {
     position: absolute;
 }
 
+.gameScreen {
+    width: 94.7368421vw;
+    height: 63.1578947vw;
+    position: fixed;
+    left: 50%;
+    top: 50%; /* TODO */
+}
+
 #shopPane {
-    width: 92.3076923vh;
-    height: 68.3076923vh;
-    top: -46.1538462vh;
-    left: -69.2307692vh;
+    width: 63.1578947vw;
+    height: 46.7368421vw;
+    top: -31.5789474vw;
+    left: -47.3684211vw;
     z-index: -2;
 }
 
 #orderPane {
-    width: 92.3076923vh;
-    height: 24vh;
-    bottom: 46.1538462vh;
-    left: -69.2307692vh;
+    width: 63.1578947vw;
+    height: 16.4210526vw;
+    bottom: 31.5789474vw;
+    left: -47.3684211vw;
     z-index: 0;
 }
 
 #ingredientsPane {
-    width: 46.1538462vh;
-    height: 92.3076923vh;
-    top: -46.1538462vh;
-    right: 69.2307692vh;
+    width: 31.5789474vw;
+    height: 63.1578947vw;
+    top: -31.5789474vw;
+    right: 47.3684211vw;
     z-index: 0;
 }
 
+/* TODO */
 #timer {
     bottom: -160px;
     left: -40px;
@@ -106,13 +86,14 @@ body {
 }
 
 #customer {
-    width: 28.9230769vh;
-    height: 37.5384615vh;
-    top: -21.5384615vh;
-    left: -12.3076923vh;
+    width: 19.7894737vw;
+    height: 25.6842105vw;
+    top: -14.7368421vw;
+    left: -8.42105263vw;
     z-index: -1;
 }
 
+/* TODO */
 .exit-right {
     animation: exit-right 1.2s;
 }
@@ -166,10 +147,10 @@ body {
 }
 
 #cup {
-    width: 25.2307692vh;
-    height: 38.1538462vh;
-    top: -17.8461538vh;
-    left: -63.6923077vh;
+    width: 17.2631579vw;
+    height: 26.1052632vw;
+    top: -12.2105263vw;
+    left: -43.5789474vw;
 }
 
 #tea {
