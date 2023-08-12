@@ -422,6 +422,7 @@ function activateIngredientButtons() {
 // Fills the cup with the given tea flavor and deactivates flavor buttons
 function fillTea(flavor) {
     const ele = document.getElementById("tea");
+    ele.style.display = "block";
     ele.src = flavor.img;
     ele.alt = flavor.name;
     currentTea.flavor = flavor;
@@ -441,6 +442,7 @@ function addTopping(topping) {
         elementId = "boba";
     }
     const ele = document.getElementById(elementId);
+    ele.style.display = "block";
     ele.src = topping.img;
     ele.alt = topping.name;
     currentTea.topping = topping;
@@ -451,6 +453,7 @@ function addTopping(topping) {
 function addTemperature(temp) {
     const ele = document.getElementById("temperature");
     if (temp.name === "cold" || temp.name === "hot") {
+        ele.style.display = "block";
         ele.src = temp.img;
         ele.alt = temp.name;
     }

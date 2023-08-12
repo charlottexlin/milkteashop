@@ -13,6 +13,19 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.secretBorder {
+    position: absolute;
+    width: 2.63157895vw;
+    height: 68.4210526vw;
+    top: -54%;
+    left: -50vw;
+    z-index: 3;
+}
+
+#sb1 {
+    background-color: white;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -26,7 +39,7 @@ body {
     height: 63.1578947vw;
     position: fixed;
     left: 50%;
-    top: 50%; /* TODO */
+    top: 50%;
 }
 
 #shopPane {
@@ -53,23 +66,22 @@ body {
     z-index: 0;
 }
 
-/* TODO */
 #timer {
-    bottom: -160px;
-    left: -40px;
-    width: 210px;
+    bottom: 46.3157895vw;
+    left: -3.15789474vw;
+    width: 22.1052632vw;
 }
 
 #perfect {
-    top: -110px;
-    left: -228px;
+    top: -11.5789474vw;
+    left: -24vw;
 }
 
 #priceText {
-    font-size: 42px;
+    font-size: 4.42105263vw;
     color: cornflowerblue;
-    top: -86px;
-    left: -190px;
+    top: -9.05263158vw;
+    left: -20vw;
 }
 
 .perfect-animation {
@@ -81,7 +93,7 @@ body {
         transform: translateY(0);
     }
     to {
-        transform: translateY(-20px);
+        transform: translateY(-2.10526316vw);
     }
 }
 
@@ -103,7 +115,7 @@ body {
         transform: translateX(0);
     }
     to {
-        transform: translateX(300px);
+        transform: translateX(31.5789474vw);
     }
 }
 
@@ -113,7 +125,7 @@ body {
 
 @keyframes enter-right {
     from {
-        transform: translateX(300px);
+        transform: translateX(31.5789474vw);
     }
     to {
         transform: translateX(0);
@@ -129,7 +141,7 @@ body {
         transform: translateX(0);
     }
     to {
-        transform: translateX(-300px);
+        transform: translateX(-31.5789474vw);
     }
 }
 
@@ -139,7 +151,7 @@ body {
 
 @keyframes enter-left {
     from {
-        transform: translateX(-300px);
+        transform: translateX(-31.5789474vw);
     }
     to {
         transform: translateX(0);
@@ -154,109 +166,106 @@ body {
 }
 
 #tea {
-    width: 24vh;
-    height: 33.8461538vh;
-    top: -14.1538462vh;
-    left: -63.0769231vh;
+    width: 16.4210526vw;
+    height: 23.1578947vw;
+    top: -9.6842105vw;
+    left: -43.1578947vw;
 }
 
 #boba {
-    width: 18.4615385vh;
-    height: 9.8461538vh;
-    top: 9.23076923vh;
-    left: -60.6153846vh;
+    width: 12.6315789vw;
+    height: 6.73684211vw;
+    top: 6.31578947vw;
+    left: -41.4736842vw;
 }
 
 #redBean {
-    width: 19.6923077vh;
-    height: 3.69230769vh;
-    top: -14.1538462vh;
-    left: -60.9230769vh;
+    width: 13.4736842vw;
+    height: 2.52631579vw;
+    top: -9.6842105vw;
+    left: -41.6842105vw;
 }
 
 #jelly {
-    width: 18.4615385vh;
-    height: 11.6923077vh;
-    top: 6.76923077vh;
-    left: -60.6153846vh;
+    width: 12.6315789vw;
+    height: 8vw;
+    top: 4.63157895vw;
+    left: -41.4736842vw;
 }
 
 #whippedCream {
-    width: 24vh;
-    height: 16.6153846vh;
-    top: -25.8461538vh;
-    left: -63.0769231vh;
+    width: 16.4210526vw;
+    height: 11.3684211vw;
+    top: -17.682105vw;
+    left: -43.1578947vw;
 }
 
 #temperature {
-    width: 17.2307692vh;
-    height: 19.6923077vh;
-    top: -27.6923077vh;
-    left: -60vh;
+    width: 11.7894737vw;
+    height: 13.4736842vw;
+    top: -18.9473684vw;
+    left: -41.0526316vw;
 }
 
 .ingredientIcons {
-    width: 41.5384615vh;
     display: flex;
     flex-direction: row;
-    row-gap: 0.76923077vh;
+    row-gap: 0.52631579vw;
     position: absolute;
     justify-content: space-around;
     flex-wrap: wrap;
+    width: 28.4210526vw;
 }
 
 #orderIcons {
-    width: 32vh;
-    top: 30.7692308vh;
-    left: -41.5284615vh;
+    top: 21.0526316vw;
+    left: -28.4210526vw;
 }
 
 #flavorIcons {
-    width: 30vh;
-    top: -32.3076923vh;
-    left: 25.2307692vh;
+    top: -22.1052632vw;
+    left: 17.2631579vw;
 }
 
 #toppingIcons {
-    width: 30vh;
-    top: -10.7692308vh;
-    left: 25.2307692vh;
+    top: -7.36842105vw;
+    left: 17.2631579vw;
 }
 
 #tempIcons {
-    width: 30vh;
-    height: 8vh;
-    top: 11.3846154vh;
-    left: 24.6153846vh;
+    top: 7.78947368vw;
+    left: 16.8421053vw;
 }
 
 .icon {
-    margin-left: 0.30769231vh;
-    margin-right: 0.30769231vh;
+    width: 5.47368421vw;
+    height: 5.47368421vw;
+    margin-left: 0.21052632vw;
+    margin-right: 0.21052632vw;
 }
 
 button {
-    width: 120px;
-    font-size: 30px;
+    width: 12.6315789vw;
+    font-size: 3.15789474vw;
     font-family: 'Neucha', cursive;
     background-color: pink;
     border-color: white;
 }
 
 #doneBtn {
-    top: 170px;
-    left: 180px;
+    top: 17.8947368vw;
+    left: 18.9473684vw;
 }
 
 #trashBtn {
-    top: 170px;
-    left: 304px;
+    top: 17.8947368vw;
+    left: 32vw;
 }
 
 #moneyCounter {
-    top: 214px;
-    left: 280px;
-    font-size: 30px;
+    top: 22.5263158vw;
+    left: 29.4736842vw;
+    font-size: 3.15789474vw;
     font-family:'Courier New', Courier, monospace;
 }
 
@@ -266,107 +275,107 @@ button {
 
 .menuBg {
     background-image: linear-gradient(rgb(206,227,255), rgb(255,212,245));
-    width: 900px;
-    height: 600px;
-    top: -300px;
-    left: -450px;
+    width: 94.7368421vw;
+    height: 63.1578947vw;
+    top: -31.5789474vw;
+    left: -47.3684211vw;
 }
 
 .menuHeader {
-    font-size: 108px;
+    font-size: 11.3684211vw;
     white-space: nowrap;
 }
 
 #musicBtn {
-    left: 292px;
-    bottom: -292px;
+    left: 30.7368421vw;
+    bottom: 32.6315789vw;
 }
 
 #soundBtn {
-    left: 372px;
-    bottom: -292px;
+    left: 39.1578947vw;
+    bottom: 32.6315789vw;
 }
 
 #startMenuBtns {
     display: flex;
     flex-direction: column;
-    width: 500px;
-    top: -80px;
-    left: -260px;
+    width: 52.6315789vw;
+    top: -8.42105263vw;
+    left: -27.3684211vw;
 }
 
 .startMenuBtn {
-    font-size: 56px;
-    height: 90px;
-    width: 500px;
-    margin-bottom: 20px;
+    font-size: 5.89473684vw;
+    height: 9.47368421vw;
+    width: 52.6315789vw;
+    margin-bottom: 2.10526316vw;
 }
 
 #startHeader {
-    top: -300px;
-    left: -270px;
+    top: -31.5789474vw;
+    left: -28.4210526vw;
 }
 
 .infoText {
-    width: 800px;
-    left: -400px;
+    width: 84.2105263vw;
+    left: -42.1052632vw;
     text-align: center;
 }
 
 #tutorialHeader {
-    font-size: 80px;
-    top: -320px;
-    left: -180px;
+    font-size: 8.42105263vw;
+    top: -33.6842105vw;
+    left: -18.9473684vw;
 }
 
 #tutorialText {
-    font-size: 28px;
-    top: -150px;
+    font-size: 2.94736842vw;
+    top: -15.7894737vw;
 }
 
 #creditsHeader {
-    font-size: 80px;
-    top: -320px;
-    left: -110px;
+    font-size: 8.42105263vw;
+    top: -33.6842105vw;
+    left: -11.5789474vw;
 }
 
 #creditsText {
-    font-size: 42px;
-    top: -156px;
+    font-size: 4.42105263vw;
+    top: -15.7894737vw;
 }
 
 #gameOverHeader {
-    top: -336px;
-    left: -200px;
+    top: -35.3684211vw;
+    left: -21.0526316vw;
 }
 
 #gameOverText {
-    font-size: 48px;
+    font-size: 5.05263158vw;
     white-space: nowrap;
-    left: -184px;
-    top: -160px;
+    left: -19.3684211vw;
+    top: -16.8421053vw;
     text-align: center;
 }
 
 #gameOverMenuBtns {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    top: 80px;
-    left: -150px;
+    width: 31.5789474vw;
+    top: 8.42105263vw;
+    left: -15.7894737vw;
 }
 
 .gameOverMenuBtn {
-    font-size: 42px;
-    width: 300px;
-    height: 80px;
-    margin-bottom: 20px;
+    font-size: 4.42105263vw;
+    width: 31.5789474vw;
+    height: 8.4105263vw;
+    margin-bottom: 2.10526316vw;
 }
 
 .backBtn {
-    font-size: 42px;
-    width: 300px;
-    height: 80px;
-    left: -150px;
-    top: 180px;
+    font-size: 4.42105263vw;
+    width: 31.5789474vw;
+    height: 8.42105263vw;
+    left: -15.7894737vw;
+    top: 18.9473684vw;
 }
