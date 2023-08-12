@@ -68,9 +68,9 @@ body {
 
 #timerText {
     font-size: 2.5263158vw;
-    text-align: left;
-    top: 9.5789474vw;
-    left: -4.2105263vw;
+    text-align: right;
+    bottom: 46.3157895vw;
+    right: 85.0526316vw;
     width: 48.4210526vw;
 }
 
