@@ -6,13 +6,14 @@ body {
 #frame {
     position: fixed;
     background-color: white;
-    width: 950px;
-    height: 650px;
+    width: 146.153846vh;
+    height: 100vh;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
 
+/*
 .secretBorder {
     position: fixed;
     width: 25px;
@@ -35,12 +36,14 @@ body {
     background-color: lightblue;
     left: -775px;
 }
+*/
 
 .gameScreen {
+    width: 138.461538vh;
+    height: 92.3076923vh;
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .absolute {
@@ -48,20 +51,26 @@ body {
 }
 
 #shopPane {
-    top: -300px;
-    left: -450px;
+    width: 92.3076923vh;
+    height: 68.3076923vh;
+    top: -46.1538462vh;
+    left: -69.2307692vh;
     z-index: -2;
 }
 
 #orderPane {
-    bottom: -300px;
-    left: -450px;
+    width: 92.3076923vh;
+    height: 24vh;
+    bottom: 46.1538462vh;
+    left: -69.2307692vh;
     z-index: 0;
 }
 
 #ingredientsPane {
-    top: -300px;
-    right: -450px;
+    width: 46.1538462vh;
+    height: 92.3076923vh;
+    top: -46.1538462vh;
+    right: 69.2307692vh;
     z-index: 0;
 }
 
@@ -97,8 +106,10 @@ body {
 }
 
 #customer {
-    top: -140px;
-    left: -80px;
+    width: 28.9230769vh;
+    height: 37.5384615vh;
+    top: -21.5384615vh;
+    left: -12.3076923vh;
     z-index: -1;
 }
 
@@ -155,73 +166,92 @@ body {
 }
 
 #cup {
-    top: -116px;
-    left: -414px;
+    width: 25.2307692vh;
+    height: 38.1538462vh;
+    top: -17.8461538vh;
+    left: -63.6923077vh;
 }
 
 #tea {
-    top: -92px;
-    left: -410px;
+    width: 24vh;
+    height: 33.8461538vh;
+    top: -14.1538462vh;
+    left: -63.0769231vh;
 }
 
 #boba {
-    top: 60px;
-    left: -394px;
+    width: 18.4615385vh;
+    height: 9.8461538vh;
+    top: 9.23076923vh;
+    left: -60.6153846vh;
 }
 
 #redBean {
-    top: -92px;
-    left: -396px;
+    width: 19.6923077vh;
+    height: 3.69230769vh;
+    top: -14.1538462vh;
+    left: -60.9230769vh;
 }
 
 #jelly {
-    top: 44px;
-    left: -394px;
+    width: 18.4615385vh;
+    height: 11.6923077vh;
+    top: 6.76923077vh;
+    left: -60.6153846vh;
 }
 
 #whippedCream {
-    top: -168px;
-    left: -410px;
+    width: 24vh;
+    height: 16.6153846vh;
+    top: -25.8461538vh;
+    left: -63.0769231vh;
 }
 
 #temperature {
-    top: -180px;
-    left: -390px;
+    width: 17.2307692vh;
+    height: 19.6923077vh;
+    top: -27.6923077vh;
+    left: -60vh;
 }
 
 .ingredientIcons {
+    width: 41.5384615vh;
     display: flex;
     flex-direction: row;
-    row-gap: 5px;
+    row-gap: 0.76923077vh;
     position: absolute;
     justify-content: space-around;
     flex-wrap: wrap;
-    width: 270px;
 }
 
 #orderIcons {
-    top: 200px;
-    left: -270px;
+    width: 32vh;
+    top: 30.7692308vh;
+    left: -41.5284615vh;
 }
 
 #flavorIcons {
-    top: -210px;
-    left: 164px;
+    width: 30vh;
+    top: -32.3076923vh;
+    left: 25.2307692vh;
 }
 
 #toppingIcons {
-    top: -70px;
-    left: 164px;
+    width: 30vh;
+    top: -10.7692308vh;
+    left: 25.2307692vh;
 }
 
 #tempIcons {
-    top: 74px;
-    left: 160px;
+    width: 30vh;
+    height: 8vh;
+    top: 11.3846154vh;
+    left: 24.6153846vh;
 }
 
 .icon {
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-left: 0.30769231vh;
+    margin-right: 0.30769231vh;
 }
 
 button {
